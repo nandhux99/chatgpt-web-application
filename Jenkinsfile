@@ -14,10 +14,8 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                {
-                                sh 'docker run -d --name myapp -p 8081:3001 myapp'
-                                
-                        }    
+                
+                                sh 'docker run -d --name myapp -p 8081:3001 myapp'   
             }
         }
     }
