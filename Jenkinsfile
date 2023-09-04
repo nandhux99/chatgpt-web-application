@@ -9,7 +9,7 @@ pipeline {
         }
         stage('build and test') {
             steps {
-                sh 'sudo docker build . -t myapp'
+                sh ' docker build . -t myapp'
             }
         }
         stage('Deploy'){
