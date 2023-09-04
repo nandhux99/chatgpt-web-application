@@ -6,27 +6,19 @@ pipeline {
     stages {
         stage('Code fetch') {
             steps {
-                git url:'https://github.com/Bandank/chatgpt-web-application.git',branch:'master'
+                git url:'https://github.com/nandhux99/chatgpt-web-application.git',branch:'master'
             }
         }
         stage('build and test') {
             steps {
-                sh 'sudo docker build . -t bandank/chatgpt-app:latest'
+                sh 'sudo docker build . -t myapp'
             }
-        }
-        stage('push') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                sh 'docker push bandank/chatgpt-app:latest'
-            }
-          }
         }
         stage('Deploy'){
             steps {
                 withCredentials([string(credentialsId: 'openAI', variable: 'OPENAI_API_KEY')]) {
-                                sh 'docker-compose down'
-                                sh "docker-compose up -d"
+                                sh 'docker run -d --name myapp -p 8081:3001 myapp'
+                                
                         }
                     
             }
