@@ -14,11 +14,10 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                withCredentials([string(credentialsId: 'openAI', variable: 'OPENAI_API_KEY')]) {
+                {
                                 sh 'docker run -d --name myapp -p 8081:3001 myapp'
                                 
-                        }
-                    
+                        }    
             }
         }
     }
