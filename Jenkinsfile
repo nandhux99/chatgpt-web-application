@@ -1,8 +1,6 @@
 pipeline {
     agent any
-     environment {
-                   key = credentials('openAI')
-                }
+     
     stages {
         stage('Code fetch') {
             steps {
